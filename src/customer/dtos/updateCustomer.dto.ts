@@ -1,0 +1,34 @@
+export class UpdateCustomerDto {
+  //   @IsNotEmpty()
+  //   @IsString()
+  //   @kMaxLength(100)
+  SubscriptionPaymentId: string;
+  ApiKeyId: string;
+  customerID: string;
+  customerName: string;
+  firstname: string;
+  lastname: string;
+  othername: string;
+  bvn: string;
+  dateOfBirth: Date;
+  email: string;
+  phone: Number;
+  startDateOfRelationship: Date;
+  status: string;
+  customerAddress: string;
+  street: string;
+  city: string;
+  country: string;
+  state: string;
+  postalcode: Number;
+  identity: string;
+  idNumber: string;
+  idType: string;
+  countryOfIssue: string;
+  expiryDate: Date;
+  image: string;
+  role: [string];
+  subscription_plan: string;
+  remainingRequests: Number;
+  password: string;
+}
