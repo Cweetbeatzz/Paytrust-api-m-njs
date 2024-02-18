@@ -32,7 +32,7 @@ import { SkipThrottle } from '@nestjs/throttler';
 import { Authorization } from 'src/decorators/authorization.decorator';
 
 @ApiTags('customers')
-@ApiBearerAuth()
+// @ApiBearerAuth()
 @Controller('customer')
 @SkipThrottle()
 export class CustomerController {
@@ -48,19 +48,19 @@ export class CustomerController {
   }
   //   ############################################################
   @Get()
-  @Authorization(true)
-  @ApiForbiddenResponse()
-  @ApiResponse({
-    status: 200,
-    description: 'All the customers',
-    type: CustomerEntity,
-  })
+  // @ApiForbiddenResponse()
+  // @ApiResponse({
+  //   status: 200,
+  //   description: 'All the customers',
+  //   type: CustomerEntity,
+  // })
   findAll(): Promise<Customer[]> {
     return this.customerService.findAll();
   }
   //   ############################################################
 
   @Get(':id')
+  @Authorization(true)
   @ApiForbiddenResponse()
   @ApiResponse({
     status: 200,

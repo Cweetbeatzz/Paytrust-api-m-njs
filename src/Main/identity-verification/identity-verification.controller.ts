@@ -6,6 +6,7 @@ import {
   Param,
   Patch,
   Post,
+  UseGuards,
 } from '@nestjs/common';
 import { Payload } from '@nestjs/microservices';
 import { ApiForbiddenResponse, ApiResponse, ApiBody } from '@nestjs/swagger';
@@ -14,7 +15,10 @@ import { UpdateIdentityDto } from './dtos/update.identity.dto';
 import { Identity } from './schemas/identity.schema';
 import { IdentityVerificationService } from './identity-verification.service';
 import { Identity as IdentityEntity } from './entities/identity.entity';
+import { AuthGuard } from 'src/Guard/auth.guard';
 
+
+@UseGuards(AuthGuard)
 @Controller('identity-verification')
 export class IdentityVerificationController {
   constructor(private IdentityService: IdentityVerificationService) {}
