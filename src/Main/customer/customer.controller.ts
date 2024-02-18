@@ -33,64 +33,66 @@ import { Customer as CustomerEntity } from './entities/customer.entity';
 @ApiBearerAuth()
 @Controller('customer')
 export class CustomerController {
-  constructor() // private customerService: CustomerService
-  {}
+  constructor(private customerService: CustomerService) {}
 
   //   ############################################################
 
-  // @Post()
-  // async create(@Payload() data: CreateCustomerDto) {
-  //   console.log('data', data);
+  @Post()
+  async create(@Payload() data: CreateCustomerDto) {
+    console.log('data', data);
 
-  //   return await this.customerService.create(data);
-  // }
-  // //   ############################################################
-  // @Get()
-  // @ApiForbiddenResponse()
-  // @ApiResponse({
-  //   status: 200,
-  //   description: 'All the customers',
-  //   type: CustomerEntity,
-  // })
-  // findAll(): Promise<Customer[]> {
-  //   return this.customerService.findAll();
-  // }
+    return await this.customerService.create(data);
+  }
+  //   ############################################################
+  @Get()
+  @ApiForbiddenResponse()
+  @ApiResponse({
+    status: 200,
+    description: 'All the customers',
+    type: CustomerEntity,
+  })
+  findAll(): Promise<Customer[]> {
+    return this.customerService.findAll();
+  }
+  //   ############################################################
 
-  // @Get(':id')
-  // @ApiForbiddenResponse()
-  // @ApiResponse({
-  //   status: 200,
-  //   description: 'A customer',
-  //   type: CustomerEntity,
-  // })
-  // findOne(@Param('id') id: string): Promise<Customer> {
-  //   return this.customerService.findOne(id);
-  // }
+  @Get(':id')
+  @ApiForbiddenResponse()
+  @ApiResponse({
+    status: 200,
+    description: 'A customer',
+    type: CustomerEntity,
+  })
+  findOne(@Param('id') id: string): Promise<Customer> {
+    return this.customerService.findOne(id);
+  }
+  //   ############################################################
 
-  // @Patch(':id')
-  // @ApiBody({ type: UpdateCustomerDto })
-  // @ApiForbiddenResponse()
-  // @ApiResponse({
-  //   status: 200,
-  //   description: 'Updated',
-  //   type: CustomerEntity,
-  // })
-  // update(
-  //   @Param('id') id: string,
-  //   @Body() updateCustomerDto: UpdateCustomerDto,
-  // ): Promise<Customer> {
-  //   return this.customerService.update(id, updateCustomerDto);
-  // }
+  @Patch(':id')
+  @ApiBody({ type: UpdateCustomerDto })
+  @ApiForbiddenResponse()
+  @ApiResponse({
+    status: 200,
+    description: 'Updated',
+    type: CustomerEntity,
+  })
+  update(
+    @Param('id') id: string,
+    @Body() updateCustomerDto: UpdateCustomerDto,
+  ): Promise<Customer> {
+    return this.customerService.update(id, updateCustomerDto);
+  }
+  //   ############################################################
 
-  // @Delete(':id')
-  // @ApiForbiddenResponse()
-  // @ApiResponse({
-  //   status: 200,
-  //   description: 'Deleted',
-  //   type: CustomerEntity,
-  // })
-  // remove(@Param('id') id: string): Promise<Customer> {
-  //   return this.customerService.remove(id);
-  // }
+  @Delete(':id')
+  @ApiForbiddenResponse()
+  @ApiResponse({
+    status: 200,
+    description: 'Deleted',
+    type: CustomerEntity,
+  })
+  remove(@Param('id') id: string): Promise<Customer> {
+    return this.customerService.remove(id);
+  }
   //   ############################################################
 }

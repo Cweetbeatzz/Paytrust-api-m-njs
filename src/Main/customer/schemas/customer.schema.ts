@@ -1,65 +1,57 @@
 import { Schema, SchemaFactory, Prop } from '@nestjs/mongoose';
-import mongoose, { Document } from 'mongoose';
+import mongoose, { Document, HydratedDocument } from 'mongoose';
 
-export type CustomerDocument = Customer & Document;
+export type CustomerDocument = HydratedDocument<Customer>;
 
 @Schema()
 export class Customer {
+  @Prop()
+  name: string;
   @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'ApiKey' })
   ApiKeyId: string;
   @Prop({ required: true })
   customerID: string;
-  @Prop()
+  @Prop({ required: true })
   customerName: string;
-  @Prop()
+  @Prop({ required: true })
   firstname: string;
-  @Prop()
+  @Prop({ required: true })
   lastname: string;
-  @Prop()
+  @Prop({ required: true })
   othername: string;
-  @Prop()
+  @Prop({ required: true })
   bvn: string;
-  @Prop()
+  @Prop({ required: true })
   dateOfBirth: Date;
-  @Prop()
+  @Prop({ required: true })
   email: string;
-  @Prop()
+  @Prop({ required: true })
   phone: Number;
   @Prop()
   startDateOfRelationship: Date;
   @Prop()
   status: string;
-  @Prop()
+  @Prop({ required: true })
   customerAddress: string;
-  @Prop()
+  @Prop({ required: true })
   street: string;
-  @Prop()
+  @Prop({ required: true })
   city: string;
-  @Prop()
+  @Prop({ required: true })
   country: string;
-  @Prop()
+  @Prop({ required: true })
   state: string;
-  @Prop()
+  @Prop({ required: true })
   postalcode: Number;
   @Prop()
-  identity: string;
-  @Prop()
-  idNumber: string;
-  @Prop()
-  idType: string;
-  @Prop()
-  countryOfIssue: string;
-  @Prop()
-  expiryDate: Date;
-  @Prop()
-  image: string;
-  @Prop()
-  role: [string];
+  profilePicture: string;
+  @Prop([String])
+  role: string[];
   @Prop()
   subscription_plan: string;
   @Prop()
   remainingRequests: Number;
-  @Prop()
+  @Prop({ required: true })
   password: string;
 }
 

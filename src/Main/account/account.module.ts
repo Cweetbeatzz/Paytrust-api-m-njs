@@ -8,7 +8,9 @@ import { AccountController } from './account.controller';
   controllers: [AccountController],
   providers: [AccountService],
   imports: [
-    // MongooseModule.forFeature([{ name: Account.name, schema: AccountSchema }]),
+    MongooseModule.forFeature([{ name: Account.name, schema: AccountSchema }]),
   ],
+
+  exports: [AccountService],
 })
 export class AccountModule {}

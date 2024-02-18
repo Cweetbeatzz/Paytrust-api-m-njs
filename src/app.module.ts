@@ -39,12 +39,23 @@ import { VirtualAccountModule } from './Main/virtual-account/virtual-account.mod
 import { VirtualCardsController } from './Main/virtual-cards/virtual-cards.controller';
 import { VirtualCardsModule } from './Main/virtual-cards/virtual-cards.module';
 import { VirtualCardsService } from './Main/virtual-cards/virtual-cards.service';
+import { TypeOrmModule } from '@nestjs/typeorm';
 
 @Module({
   imports: [
-    // MongooseModule.forRoot(
-    //   process.env.MONGODB_STORE_URI || 'mongodb://localhost/nest',
-    // ),
+    MongooseModule.forRoot(
+      process.env.MONGODB_STORE_URI || 'mongodb://127.0.0.1/Paytrust-api-m-njs',
+    ),
+    // TypeOrmModule.forRoot({
+    //   type: 'mongodb',
+    //   host: 'localhost',
+    //   port: 27017,
+    //   username: 'root',
+    //   password: 'root',
+    //   database: 'Paytrust-api-m-njs',
+    //   entities: [],
+    //   synchronize: true,
+    // }),
     AccountModule,
     CustomerModule,
     AuthModule,
@@ -78,15 +89,15 @@ import { VirtualCardsService } from './Main/virtual-cards/virtual-cards.service'
   ],
   providers: [
     AppService,
-    AccountService,
-    CustomerService,
-    BanksService,
-    VirtualCardsService,
-    LoansService,
-    TransactionsService,
-    FraudService,
-    BillPaymentsService,
-    DonationService,
+    // AccountService,
+    // CustomerService,
+    // BanksService,
+    // VirtualCardsService,
+    // LoansService,
+    // TransactionsService,
+    // FraudService,
+    // BillPaymentsService,
+    // DonationService,
   ],
 })
 export class AppModule {}
