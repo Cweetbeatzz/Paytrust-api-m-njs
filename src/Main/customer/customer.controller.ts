@@ -28,10 +28,13 @@ import {
 } from '@nestjs/swagger';
 import { Customer } from './schemas/customer.schema';
 import { Customer as CustomerEntity } from './entities/customer.entity';
+import { SkipThrottle } from '@nestjs/throttler';
+import { Authorization } from 'src/decorators/authorization.decorator';
 
 @ApiTags('customers')
 @ApiBearerAuth()
 @Controller('customer')
+@SkipThrottle()
 export class CustomerController {
   constructor(private customerService: CustomerService) {}
 
@@ -45,6 +48,7 @@ export class CustomerController {
   }
   //   ############################################################
   @Get()
+  @Authorization(true)
   @ApiForbiddenResponse()
   @ApiResponse({
     status: 200,

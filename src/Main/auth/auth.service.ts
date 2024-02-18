@@ -1,41 +1,37 @@
-import { Body, Injectable, Req } from '@nestjs/common';
+import { Body, Injectable, Req, UnauthorizedException } from '@nestjs/common';
 import { comparePasswords } from '../../helpers/passwordHash';
 import { generateToken } from '../../helpers/Jwt';
+import { CustomerService } from '../customer/customer.service';
+// import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
 export class AuthService {
-  constructor() {}
-
+  constructor(
+    private customerService: CustomerService,
+    // private jwtService: JwtService,
+  ) {}
   // ######################################################################
 
-  async login(@Body() req: any) {
-    try {
-      console.log('loggining in...');
-      console.log(req.body);
-      const { email, password } = req.body;
-      // console.log("email", email);
-      //search fr email
-      //   const searchUserEmail = await AuthRepoInstance.login(email);
-      const searchUserEmail = 'await AuthRepoInstance.login(email)';
-      // console.log("searchUserEmail", searchUserEmail);
-      // console.log("searchUserEmail.password", searchUserEmail.data.password);
-      // compare passwords
-      if (searchUserEmail) {
-        //if password correct
-        // if (comparePasswords(searchUserEmail.data.password, password)) {
-        //   //send these details plus the generated token
-        //   return {
-        //     id: searchUserEmail.data._id,
-        //     lastname: searchUserEmail.data.lastname,
-        //     email: searchUserEmail.data.email,
-        //     role: searchUserEmail.data.role,
-        //     token: generateToken(searchUserEmail),
-        //   };
-        // }
-      }
-      return { error: 'Unauthorized access' };
-    } catch (error) {
-      console.log(error);
+  // async signIn(id: string, pass: string): Promise<any> {
+  //   const user = await this.customerService.findOne(id);
+  //   if (user?.password !== pass) {
+  //     throw new UnauthorizedException();
+  //   }
+  //   const { password, ...result } = user;
+  //   // TODO: Generate a JWT and return it here
+  //   // instead of the user object
+  //   return result;
+  // }
+
+  async signIn(email: string, pass: string): Promise<{ access_token: string }> {
+    const user = await this.customerService.findOne(email);
+    if (user?.password !== pass) {
+      throw new UnauthorizedException();
     }
+    const payload = { lastname: user.lastname, email: user.email };
+    return {
+      // access_token: await this.jwtService.signAsync(payload),
+      access_token: 'await this.jwtService.signAsync(payload)',
+    };
   }
 }

@@ -12,5 +12,6 @@ import { AccountController } from './account.controller';
   ],
 
   exports: [AccountService],
+  
 })
 export class AccountModule {}

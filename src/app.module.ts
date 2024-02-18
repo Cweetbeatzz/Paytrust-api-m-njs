@@ -3,6 +3,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 
 import { MongooseModule } from '@nestjs/mongoose';
+import { ThrottlerModule } from '@nestjs/throttler';
 import { AccountController } from './Main/account/account.controller';
 import { AccountModule } from './Main/account/account.module';
 import { AccountService } from './Main/account/account.service';
@@ -40,12 +41,32 @@ import { VirtualCardsController } from './Main/virtual-cards/virtual-cards.contr
 import { VirtualCardsModule } from './Main/virtual-cards/virtual-cards.module';
 import { VirtualCardsService } from './Main/virtual-cards/virtual-cards.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { APP_GUARD } from '@nestjs/core';
+import { AuthGuard } from './Guard/auth.guard';
+import { RolesGuard } from './Guard/roles.guard';
 
 @Module({
   imports: [
     MongooseModule.forRoot(
       process.env.MONGODB_STORE_URI || 'mongodb://127.0.0.1/Paytrust-api-m-njs',
     ),
+    ThrottlerModule.forRoot([
+      {
+        name: 'standard',
+        ttl: 1000,
+        limit: 3,
+      },
+      {
+        name: 'limited-edition',
+        ttl: 10000,
+        limit: 20,
+      },
+      {
+        name: 'enterprise',
+        ttl: 60000,
+        limit: 100,
+      },
+    ]),
     // TypeOrmModule.forRoot({
     //   type: 'mongodb',
     //   host: 'localhost',
@@ -89,15 +110,14 @@ import { TypeOrmModule } from '@nestjs/typeorm';
   ],
   providers: [
     AppService,
-    // AccountService,
-    // CustomerService,
-    // BanksService,
-    // VirtualCardsService,
-    // LoansService,
-    // TransactionsService,
-    // FraudService,
-    // BillPaymentsService,
-    // DonationService,
+    {
+      provide: APP_GUARD,
+      useClass: AuthGuard,
+    },
+    {
+      provide: APP_GUARD,
+      useClass: RolesGuard,
+    },
   ],
 })
 export class AppModule {}
