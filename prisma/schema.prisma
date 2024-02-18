@@ -10,16 +10,96 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Customers {}
-model accounts {}
-model banks {}
-model loans {}
-model investments {}
-model roles {}
-model transactions {}
-model virtualAccounts {}
-model virtualCards {}
-model identityVerification {}
-model disputes {}
-model billpayments {}
-model beneficaries {}
+model Customers {
+  id Int @id @default(autoincrement())
+  SubscriptionPaymentId: string;
+  ApiKeyId: string;
+  customerID: string;
+  customerName: string;
+  firstname: string;
+  lastname: string;
+  othername: string;
+  bvn: string;
+  dateOfBirth: Date;
+  @IsEmail()
+  email: string;
+  phone: Number;
+  startDateOfRelationship: Date;
+  status: string;
+  customerAddress: string;
+  street: string;
+  city: string;
+  country: string;
+  state: string;
+  postalcode: Number;
+  identity: string;
+  idNumber: string;
+  idType: string;
+  countryOfIssue: string;
+  expiryDate: Date;
+  image: string;
+  role: [string];
+  subscription_plan:string
+  createdAt Datetime @default(now())
+  updatedAt Datetime @updatedAt
+}
+model accounts {
+  id Int @id @default(autoincrement())
+  createdAt Datetime @default(now())
+  updatedAt Datetime @updatedAt
+}
+model banks {
+    id Int @id @default(autoincrement())
+  createdAt Datetime @default(now())
+  updatedAt Datetime @updatedAt
+}
+model loans {
+    id Int @id @default(autoincrement())
+  createdAt Datetime @default(now())
+  updatedAt Datetime @updatedAt
+}
+model investments {
+    id Int @id @default(autoincrement())
+  createdAt Datetime @default(now())
+  updatedAt Datetime @updatedAt
+}
+model roles {
+    id Int @id @default(autoincrement())
+  createdAt Datetime @default(now())
+  updatedAt Datetime @updatedAt
+}
+model transactions {
+    id Int @id @default(autoincrement())
+  createdAt Datetime @default(now())
+  updatedAt Datetime @updatedAt
+}
+model virtualAccounts {
+    id Int @id @default(autoincrement())
+  createdAt Datetime @default(now())
+  updatedAt Datetime @updatedAt
+}
+model virtualCards {
+    id Int @id @default(autoincrement())
+  createdAt Datetime @default(now())
+  updatedAt Datetime @updatedAt
+}
+model identityVerification {
+    id Int @id @default(autoincrement())
+  createdAt Datetime @default(now())
+  updatedAt Datetime @updatedAt
+}
+model disputes {
+    id Int @id @default(autoincrement())
+  createdAt Datetime @default(now())
+  updatedAt Datetime @updatedAt
+}
+model billpayments {
+    id Int @id @default(autoincrement())
+  createdAt Datetime @default(now())
+  updatedAt Datetime @updatedAt
+}
+model beneficaries {
+    id Int @id @default(autoincrement())
+  createdAt Datetime @default(now())
+  updatedAt Datetime @updatedAt
+}
