@@ -7,29 +7,28 @@ import { Account, AccountDocument } from './schemas/account.schema';
 
 @Injectable()
 export class AccountService {
-  constructor(
-    @InjectModel(Account.name) private AccountModel: Model<AccountDocument>,
-  ) {}
+  constructor() // @InjectModel(Account.name) private AccountModel: Model<AccountDocument>,
+  {}
 
-  async getAll(): Promise<Account[]> {
-    return this.AccountModel.find().exec();
-  }
+  // async getAll(): Promise<Account[]> {
+  //   return this.AccountModel.find().exec();
+  // }
 
-  async getById(id: string): Promise<Account> {
-    return this.AccountModel.findById(id);
-  }
+  // async getById(id: string): Promise<Account> {
+  //   return this.AccountModel.findById(id);
+  // }
 
-  async create(AccountDto: CreateAccountDto): Promise<Account> {
-    const newAccount = new this.AccountModel(AccountDto);
+  // async create(AccountDto: CreateAccountDto): Promise<Account> {
+  //   const newAccount = new this.AccountModel(AccountDto);
 
-    return newAccount.save();
-  }
+  //   return newAccount.save();
+  // }
 
-  async update(id: string, AccountDto: UpdateAccountDto): Promise<Account> {
-    return this.AccountModel.findByIdAndUpdate(id, AccountDto, { new: true });
-  }
+  // async update(id: string, AccountDto: UpdateAccountDto): Promise<Account> {
+  //   return this.AccountModel.findByIdAndUpdate(id, AccountDto, { new: true });
+  // }
 
-  async remove(id: string): Promise<Account> {
-    return this.AccountModel.findByIdAndDelete(id);
-  }
+  // async remove(id: string): Promise<Account> {
+  //   return this.AccountModel.findByIdAndDelete(id);
+  // }
 }

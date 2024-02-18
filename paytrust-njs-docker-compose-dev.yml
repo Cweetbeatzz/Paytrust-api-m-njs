@@ -1,0 +1,87 @@
+version: '3.8'
+services:
+  # # api service
+  # api:
+  #   build: .
+  #   container_name: "paytrust-api-m-py"
+  #   # the database should start before the api
+  #   depends_on:
+  #     - postgres
+  #   volumes: #look out for changes and update docker image files
+  #     - ./:/usr/src/paytrust-api-m-py:ro
+  #   command: uvicorn main:app --host 0.0.0.0 --port 8000 --reload
+  #   ports:
+  #     - "8000:8000"
+  #   # env_file:
+  #   #   - ./.env
+  #   enviroment:
+  #     - MONGO_DB_CONNECTION_STRING = mongodb://localhost:27017/PayTrust_Db_Manual
+  #     - DATABASE_HOSTNAME=postgres
+  #     - DATABASE_PORT = 9880
+  #     - DATABASE_PASSWORD=1234567890
+  #     - DATABASE_NAME=PaytrustApi
+  #     - DATABASE_USERNAME=postgres
+  #     - JWT_SECRET_KEY=934893Y8Y489HF89384U389HF98JF983HY9F8H3F3F4G34G
+  #     - ALGORITHM=HS256
+  #     - ACCESS_TOKEN_EXPIRE_MINUTES=30
+  #     - MAIL_USERNAME=your_esp_username
+  #     - MAIL_PASSWORD=your_esp_password
+  #     - MAIL_FROM=your_sender_email_address
+  #     - PHONE_NUMBER=your_sms_sender_number
+
+  # # redis service
+  # redis:
+  #   image: redis:latest
+  #   container_name: redis
+  #   restart: always
+  #   volumes:
+  #     - redis_volume_data:/data #means if container is lost creating a new contrainer data wont be lost unless deleted
+  #   ports:
+  #     - "6379:6379"
+  # #redis insigt service is the ui to view redis database data
+  # redis_insight:
+  #   image: redislabs/redisinsight:latest
+  #   container_name: redis_insight
+  #   restart: always
+  #   volumes:
+  #     - redis_insight_volume_data:/data #means if container is lost creating a new contrainer data wont be lost unless deleted
+  #   ports:
+  #     - "8001:8001"
+  # # mongodb service
+  # mongo:
+  #   image: mongo
+  #   volumes:
+  #     - mongodb_volume_data:/data #means if container is lost creating a new contrainer data wont be lost unless deleted
+  #   restart: always
+  #   environment:
+  #     MONGO_INITDB_ROOT_USERNAME: root
+  #     MONGO_INITDB_ROOT_PASSWORD: example
+  #   ports:
+  #     - "27017:27017"
+
+  # mongo-express:
+  #   image: mongo-express
+  #   restart: always
+  #   ports:
+  #     - 8081:8081
+  #   environment:
+  #     ME_CONFIG_MONGODB_ADMINUSERNAME: root
+  #     ME_CONFIG_MONGODB_ADMINPASSWORD: example
+  #     ME_CONFIG_MONGODB_URL: mongodb://root:example@mongo:27017/
+  # postgres service
+  postgres:
+    image: postgres
+    container_name: postgres_paytrust_njs_db
+    # enviroment:
+    #   - POSTGRES_PASSWORD=1234567890
+    #   - POSTGRES_DB=Paytrust-Api-m-njs
+    volumes:
+      - postgres_volume_data:/var/lib/postgresql/data #means if container is lost creating a new contrainer data wont be lost unless deleted
+    ports:
+      - '5434:5434'
+
+volumes:
+  # redis_volume_data:
+  # redis_insight_volume_data:
+  # mongodb_volume_data:
+  postgres_volume_data:

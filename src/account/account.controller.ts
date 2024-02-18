@@ -18,7 +18,8 @@ import { AccountService } from './account.service';
 
 @Controller('account')
 export class AccountController {
-  constructor(private readonly accountsService: AccountService) {}
+  constructor() // private readonly accountsService: AccountService
+  {}
 
   // @Get()
   // @Redirect('https://google.com', 301)
@@ -27,38 +28,38 @@ export class AccountController {
   //   return 'getAll()';
   // }
 
-  @Get()
-  getAll(): Promise<Account[]> {
-    return this.accountsService.getAll();
-  }
+  // @Get()
+  // getAll(): Promise<Account[]> {
+  //   return this.accountsService.getAll();
+  // }
 
-  @Get(':id')
-  getOne(@Param('id') id: string): Promise<Account> {
-    return this.accountsService.getById(id);
-  }
+  // @Get(':id')
+  // getOne(@Param('id') id: string): Promise<Account> {
+  //   return this.accountsService.getById(id);
+  // }
 
-  @Post()
-  @HttpCode(HttpStatus.CREATED)
-  @Header('Cache-Control', 'none')
-  @ApiOperation({ summary: 'Create Account' })
-  @ApiResponse({ status: 403, description: 'Forbidden.' })
-  @ApiResponse({ status: 201, description: 'Created' })
-  create(@Body() createAccountDto: CreateAccountDto): Promise<Account> {
-    return this.accountsService.create(createAccountDto);
-  }
+  // @Post()
+  // @HttpCode(HttpStatus.CREATED)
+  // @Header('Cache-Control', 'none')
+  // @ApiOperation({ summary: 'Create Account' })
+  // @ApiResponse({ status: 403, description: 'Forbidden.' })
+  // @ApiResponse({ status: 201, description: 'Created' })
+  // create(@Body() createAccountDto: CreateAccountDto): Promise<Account> {
+  //   return this.accountsService.create(createAccountDto);
+  // }
 
-  @Put(':id')
-  @ApiOperation({ summary: 'Update Account' })
-  @ApiResponse({ status: 200, description: 'Updated' })
-  update(
-    @Body() updateAccountDto: UpdateAccountDto,
-    @Param('id') id: string,
-  ): Promise<Account> {
-    return this.accountsService.update(id, updateAccountDto);
-  }
+  // @Put(':id')
+  // @ApiOperation({ summary: 'Update Account' })
+  // @ApiResponse({ status: 200, description: 'Updated' })
+  // update(
+  //   @Body() updateAccountDto: UpdateAccountDto,
+  //   @Param('id') id: string,
+  // ): Promise<Account> {
+  //   return this.accountsService.update(id, updateAccountDto);
+  // }
 
-  @Delete(':id')
-  remove(@Param('id') id: string): Promise<Account> {
-    return this.accountsService.remove(id);
-  }
+  // @Delete(':id')
+  // remove(@Param('id') id: string): Promise<Account> {
+  //   return this.accountsService.remove(id);
+  // }
 }

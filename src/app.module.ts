@@ -37,13 +37,13 @@ import { TransactionsService } from './transactions/transactions.service';
 import { TransactionsController } from './transactions/transactions.controller';
 import { TransfersModule } from './transfers/transfers.module';
 import { LoansModule } from './loans/loans.module';
-import { LoansService } from './loans/loans.service';
+import { AccountService } from './account/account.service';
 
 @Module({
   imports: [
-    MongooseModule.forRoot(
-      process.env.MONGODB_STORE_URI || 'mongodb://localhost/nest',
-    ),
+    // MongooseModule.forRoot(
+    //   process.env.MONGODB_STORE_URI || 'mongodb://localhost/nest',
+    // ),
     AccountModule,
     CustomerModule,
     AuthModule,
@@ -62,7 +62,30 @@ import { LoansService } from './loans/loans.service';
     DonationModule,
     RolesModule,
   ],
-  controllers: [AppController, AccountController, CustomerController, AuthController, BanksController, VirtualCardsController, LoansController, TransactionsController, FraudController, BillPaymentsController, DonationController],
-  providers: [AppService, CustomerService, BanksService, VirtualCardsService, LoansService, TransactionsService, FraudService, BillPaymentsService, DonationService],
+  controllers: [
+    AppController,
+    AccountController,
+    CustomerController,
+    AuthController,
+    BanksController,
+    VirtualCardsController,
+    LoansController,
+    TransactionsController,
+    FraudController,
+    BillPaymentsController,
+    DonationController,
+  ],
+  providers: [
+    AppService,
+    AccountService,
+    CustomerService,
+    BanksService,
+    VirtualCardsService,
+    LoansService,
+    TransactionsService,
+    FraudService,
+    BillPaymentsService,
+    DonationService,
+  ],
 })
 export class AppModule {}
