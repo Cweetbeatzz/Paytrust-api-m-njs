@@ -1,0 +1,25 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Customers {}
+model accounts {}
+model banks {}
+model loans {}
+model investments {}
+model roles {}
+model transactions {}
+model virtualAccounts {}
+model virtualCards {}
+model identityVerification {}
+model disputes {}
+model billpayments {}
+model beneficaries {}
