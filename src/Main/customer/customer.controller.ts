@@ -31,8 +31,8 @@ import { Customer as CustomerEntity } from './entities/customer.entity';
 import { SkipThrottle } from '@nestjs/throttler';
 import { Authorization } from 'src/decorators/authorization.decorator';
 
-@ApiTags('customers')
-// @ApiBearerAuth()
+@ApiTags('customer')
+@ApiBearerAuth()
 @Controller('customer')
 @SkipThrottle()
 export class CustomerController {
@@ -48,12 +48,12 @@ export class CustomerController {
   }
   //   ############################################################
   @Get()
-  // @ApiForbiddenResponse()
-  // @ApiResponse({
-  //   status: 200,
-  //   description: 'All the customers',
-  //   type: CustomerEntity,
-  // })
+  @ApiForbiddenResponse()
+  @ApiResponse({
+    status: 200,
+    description: 'All the customers',
+    type: CustomerEntity,
+  })
   findAll(): Promise<Customer[]> {
     return this.customerService.findAll();
   }

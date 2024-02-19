@@ -9,7 +9,7 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { Payload } from '@nestjs/microservices';
-import { ApiForbiddenResponse, ApiResponse, ApiBody } from '@nestjs/swagger';
+import { ApiForbiddenResponse, ApiResponse, ApiBody, ApiTags } from '@nestjs/swagger';
 import { AuthGuard } from 'src/Guard/auth.guard';
 import { Authorization } from 'src/decorators/authorization.decorator';
 import { CreateVirtualAccDto } from './dtos/createVirtualAcc.dto';
@@ -19,6 +19,7 @@ import { VirtualAccountService } from './virtual-account.service';
 import { VirtualAcc } from './schemas/virtualAcc.schema';
 
 @UseGuards(AuthGuard)
+@ApiTags('virtual-account')
 @Controller('virtual-account')
 export class VirtualAccountController {
   constructor(private VirtualAccService: VirtualAccountService) {}

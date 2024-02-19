@@ -9,7 +9,7 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { Payload } from '@nestjs/microservices';
-import { ApiForbiddenResponse, ApiResponse, ApiBody } from '@nestjs/swagger';
+import { ApiForbiddenResponse, ApiResponse, ApiBody, ApiTags } from '@nestjs/swagger';
 import { CreateIdentityDto } from './dtos/create.Identity.dto';
 import { UpdateIdentityDto } from './dtos/update.identity.dto';
 import { Identity } from './schemas/identity.schema';
@@ -19,6 +19,7 @@ import { AuthGuard } from 'src/Guard/auth.guard';
 
 
 @UseGuards(AuthGuard)
+@ApiTags('identity-verification')
 @Controller('identity-verification')
 export class IdentityVerificationController {
   constructor(private IdentityService: IdentityVerificationService) {}
