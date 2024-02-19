@@ -44,6 +44,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { APP_GUARD } from '@nestjs/core';
 import { AuthGuard } from './Guard/auth.guard';
 import { RolesGuard } from './Guard/roles.guard';
+import { ChargeBacksModule } from './main/charge-backs/charge-backs.module';
 
 @Module({
   imports: [
@@ -94,6 +95,7 @@ import { RolesGuard } from './Guard/roles.guard';
     BeneficiariesModule,
     DonationModule,
     RolesModule,
+    ChargeBacksModule,
   ],
   controllers: [
     AppController,
