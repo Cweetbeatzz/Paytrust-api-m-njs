@@ -24,3 +24,5 @@ async function bootstrap() {
   await app.listen(process.env.PORT || 3000);
 }
 bootstrap();
+
+// http://localhost:3000/api
