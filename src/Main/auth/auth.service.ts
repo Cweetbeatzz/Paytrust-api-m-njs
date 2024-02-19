@@ -2,13 +2,13 @@ import { Body, Injectable, Req, UnauthorizedException } from '@nestjs/common';
 import { comparePasswords } from '../../helpers/passwordHash';
 import { generateToken } from '../../helpers/Jwt';
 import { CustomerService } from '../customer/customer.service';
-// import { JwtService } from '@nestjs/jwt';
+import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
 export class AuthService {
   constructor(
     private customerService: CustomerService,
-    // private jwtService: JwtService,
+    private jwtService: JwtService,
   ) {}
   // ######################################################################
 
@@ -30,8 +30,8 @@ export class AuthService {
     }
     const payload = { lastname: user.lastname, email: user.email };
     return {
-      // access_token: await this.jwtService.signAsync(payload),
-      access_token: 'await this.jwtService.signAsync(payload)',
+      
+      access_token: await this.jwtService.signAsync(payload),
     };
   }
 }
