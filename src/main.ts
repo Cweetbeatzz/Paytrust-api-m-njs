@@ -13,8 +13,6 @@ async function bootstrap() {
 
   const options = new DocumentBuilder()
     .setTitle('API docs')
-    .addTag('users')
-    .addTag('accounts')
     .setVersion('1.0')
     .addBearerAuth()
     .build();
