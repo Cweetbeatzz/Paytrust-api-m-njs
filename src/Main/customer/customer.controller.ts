@@ -30,9 +30,10 @@ import { Customer } from './schemas/customer.schema';
 import { Customer as CustomerEntity } from './entities/customer.entity';
 import { SkipThrottle } from '@nestjs/throttler';
 import { Authorization } from 'src/decorators/authorization.decorator';
+import { parseDateOfBirth } from '../../helpers/dateHelper';
 
 @ApiTags('customer')
-@ApiBearerAuth()
+// @ApiBearerAuth()
 @Controller('customer')
 @SkipThrottle()
 export class CustomerController {
@@ -42,10 +43,17 @@ export class CustomerController {
 
   @Post()
   async create(@Payload() data: CreateCustomerDto) {
-    console.log('data', data);
-
-    return await this.customerService.create(data);
+    try {
+      data.dateOfBirth = parseDateOfBirth(data.dateOfBirth.toString());
+      data.startDateOfRelationship = parseDateOfBirth(
+        data.startDateOfRelationship.toString(),
+      );
+      return await this.customerService.create(data);
+    } catch (error) {
+      return error;
+    }
   }
+
   //   ############################################################
   @Get()
   @ApiForbiddenResponse()

@@ -9,11 +9,12 @@ import {
   IsPhoneNumber,
 } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
+import { Type } from 'class-transformer';
 
 export class CreateCustomerDto {
   @IsNotEmpty()
   @IsString()
-  @MaxLength(100)
+  // @MaxLength(100)
   @ApiProperty({
     example: 'standard',
     description: 'The subscription plan title for the User',
@@ -62,6 +63,7 @@ export class CreateCustomerDto {
   })
   othername: string;
 
+  @Type(() => Date)
   @IsDate()
   @ApiProperty({
     example: '29/2/1995',
@@ -79,11 +81,12 @@ export class CreateCustomerDto {
   @IsNotEmpty()
   @IsPhoneNumber()
   @ApiProperty({
-    example: '+23467890889409',
+    example: '+23467890889',
     description: 'Customers phone',
   })
   phone: Number;
 
+  @Type(() => Date)
   @IsDate()
   @ApiProperty({
     example: '29/2/1995',
@@ -140,7 +143,7 @@ export class CreateCustomerDto {
   state: string;
 
   @IsNotEmpty()
-  @IsString()
+  @IsNumber()
   @ApiProperty({
     example: '100284',
     description: 'Customers postal code',

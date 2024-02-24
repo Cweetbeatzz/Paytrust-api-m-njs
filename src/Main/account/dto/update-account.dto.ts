@@ -78,8 +78,4 @@ export class UpdateAccountDto {
     description: 'The referenceId of the Customer',
   })
   referenceId: string;
-
-
-
-
 }

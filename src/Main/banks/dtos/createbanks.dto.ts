@@ -10,9 +10,20 @@ import {
 } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 
-export class CreateBanksDto {
+export class CreateBankDto {
   @IsNotEmpty()
   @IsString()
-  @MaxLength(100)
-  customerId: string;
+  @ApiProperty({
+    example: 'GTB',
+    description: 'The name of the bank',
+  })
+  // @MaxLength(100)
+  bank: string;
+  @IsNotEmpty()
+  @IsString()
+  @ApiProperty({
+    example: '2033',
+    description: 'The code of the bank',
+  })
+  code: string;
 }

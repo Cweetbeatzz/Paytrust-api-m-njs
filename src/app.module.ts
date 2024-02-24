@@ -9,9 +9,9 @@ import { AccountModule } from './Main/account/account.module';
 import { AccountService } from './Main/account/account.service';
 import { AuthController } from './Main/auth/auth.controller';
 import { AuthModule } from './Main/auth/auth.module';
-import { BanksController } from './Main/banks/banks.controller';
+import { BankController } from './Main/banks/banks.controller';
 import { BanksModule } from './Main/banks/banks.module';
-import { BanksService } from './Main/banks/banks.service';
+import { BankService } from './Main/banks/banks.service';
 import { BeneficiariesModule } from './Main/beneficiaries/beneficiaries.module';
 import { BillPaymentsController } from './Main/bill-payments/bill-payments.controller';
 import { BillPaymentsModule } from './Main/bill-payments/bill-payments.module';
@@ -102,7 +102,7 @@ import { ChargeBacksModule } from './main/charge-backs/charge-backs.module';
     AccountController,
     CustomerController,
     AuthController,
-    BanksController,
+    BankController,
     VirtualCardsController,
     LoansController,
     TransactionsController,

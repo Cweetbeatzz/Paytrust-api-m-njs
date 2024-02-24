@@ -9,7 +9,7 @@ async function bootstrap() {
 
   app.enableCors();
   app.use(helmet());
-  app.useGlobalPipes(new ValidationPipe({ whitelist: true }));
+  app.useGlobalPipes(new ValidationPipe({ transform: true, whitelist: true }));
 
   const options = new DocumentBuilder()
     .setTitle('API docs')

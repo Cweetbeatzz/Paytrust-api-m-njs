@@ -139,7 +139,7 @@ export class UpdateCustomerDto {
   state: string;
 
   @IsNotEmpty()
-  @IsString()
+  @IsNumber()
   @ApiProperty({
     example: '100284',
     description: 'Customers postal code',

@@ -22,7 +22,7 @@ export class Customer {
   othername: string;
   @Prop({ required: true })
   bvn: string;
-  @Prop({ required: true })
+  @Prop({ type: Date, required: true })
   dateOfBirth: Date;
   @Prop({ required: true })
   email: string;
