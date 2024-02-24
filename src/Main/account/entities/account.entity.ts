@@ -1,7 +1,10 @@
 import { ApiProperty } from '@nestjs/swagger';
 
 export class AccountEntity {
-  @ApiProperty({ example: 'John', description: 'The name of the Customer' })
+  @ApiProperty({
+    example: '1387hbhejcnjecn',
+    description: 'The name of the Customer',
+  })
   bankId: string;
 
   @ApiProperty({

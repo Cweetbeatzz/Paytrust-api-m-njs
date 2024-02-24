@@ -41,7 +41,7 @@ export class AccountController {
   @ApiForbiddenResponse()
   @ApiResponse({
     status: 200,
-    description: 'An Account',
+    description: 'created',
     type: AccountEntity,
   })
   getAll(): Promise<Account[]> {

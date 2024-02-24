@@ -79,14 +79,7 @@ export class UpdateAccountDto {
   })
   referenceId: string;
 
-  @IsNotEmpty()
-  @IsString()
-  @ApiProperty({
-    example: '617276c3dfdf6dd54ce29a6c',
-    description: 'The id of the Account',
-  })
-  _id: string;
 
-  @ApiProperty({ example: 0, description: 'Version' })
-  __v: number;
+
+
 }
