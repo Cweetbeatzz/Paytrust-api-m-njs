@@ -9,6 +9,7 @@ import {
 } from '@nestjs/common';
 import { Payload } from '@nestjs/microservices';
 import {
+  ApiBearerAuth,
   ApiBody,
   ApiForbiddenResponse,
   ApiResponse,
@@ -23,6 +24,7 @@ import { UpdateBankDto } from './dtos/updatebanks.dto';
 import { BankService } from './banks.service';
 
 @ApiTags('banks')
+@ApiBearerAuth()
 @Controller('banks')
 export class BankController {
   constructor(private BankService: BankService) {}

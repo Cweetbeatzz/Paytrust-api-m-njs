@@ -33,7 +33,7 @@ import { Authorization } from 'src/decorators/authorization.decorator';
 import { parseDateOfBirth } from '../../helpers/dateHelper';
 
 @ApiTags('customer')
-// @ApiBearerAuth()
+@ApiBearerAuth()
 @Controller('customer')
 @SkipThrottle()
 export class CustomerController {
