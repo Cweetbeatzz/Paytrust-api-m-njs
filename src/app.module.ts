@@ -3,7 +3,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 
 import { MongooseModule } from '@nestjs/mongoose';
-import { ThrottlerModule } from '@nestjs/throttler';
+import { ThrottlerModule, ThrottlerGuard } from '@nestjs/throttler';
 import { AccountController } from './Main/account/account.controller';
 import { AccountModule } from './Main/account/account.module';
 import { AccountService } from './Main/account/account.service';
@@ -54,17 +54,17 @@ import { ChargeBacksModule } from './main/charge-backs/charge-backs.module';
     ThrottlerModule.forRoot([
       {
         name: 'standard',
-        ttl: 1000,
-        limit: 3,
+        ttl: 60000, //1 minute in miliseconds
+        limit: 5,
       },
       {
         name: 'limited-edition',
-        ttl: 10000,
+        ttl: 60000, //1 minute in miliseconds
         limit: 20,
       },
       {
         name: 'enterprise',
-        ttl: 60000,
+        ttl: 60000, //1 minute in miliseconds
         limit: 100,
       },
     ]),
@@ -120,6 +120,10 @@ import { ChargeBacksModule } from './main/charge-backs/charge-backs.module';
     //   provide: APP_GUARD,
     //   useClass: RolesGuard,
     // },
+    {
+      provide: APP_GUARD,
+      useClass: ThrottlerGuard,
+    },
   ],
 })
 export class AppModule {}

@@ -9,6 +9,7 @@ async function bootstrap() {
 
   app.enableCors();
   app.use(helmet());
+  app.setGlobalPrefix('api');
   app.useGlobalPipes(new ValidationPipe({ transform: true, whitelist: true }));
 
   const options = new DocumentBuilder()

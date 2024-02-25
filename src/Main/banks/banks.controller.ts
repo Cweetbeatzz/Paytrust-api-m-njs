@@ -22,7 +22,8 @@ import { BankEntity } from './entities/banks.entity';
 import { Bank } from './schemas/banks.schema';
 import { UpdateBankDto } from './dtos/updatebanks.dto';
 import { BankService } from './banks.service';
-
+import { SkipThrottle } from '@nestjs/throttler';
+@SkipThrottle()
 @ApiTags('banks')
 @ApiBearerAuth()
 @Controller('banks')
@@ -30,7 +31,7 @@ export class BankController {
   constructor(private BankService: BankService) {}
 
   //   ############################################################
-
+  @SkipThrottle({ default: false })
   @Post()
   async create(@Payload() data: CreateBankDto) {
     try {
@@ -41,6 +42,7 @@ export class BankController {
   }
 
   //   ############################################################
+  @SkipThrottle({ default: false })
   @Get()
   @ApiForbiddenResponse()
   @ApiResponse({
