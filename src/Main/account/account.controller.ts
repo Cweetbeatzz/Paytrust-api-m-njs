@@ -5,6 +5,7 @@ import {
   Get,
   Header,
   HttpCode,
+  HttpException,
   HttpStatus,
   Param,
   Post,
@@ -26,12 +27,16 @@ import { Account } from './schemas/account.schema';
 import { AccountService } from './account.service';
 import { AuthGuard } from 'src/Guard/auth.guard';
 import { AccountEntity } from './entities/account.entity';
+import { CustomerService } from '../customer/customer.service';
 
 @UseGuards(AuthGuard)
 @ApiTags('account')
 @Controller('account')
 export class AccountController {
-  constructor(private readonly accountsService: AccountService) {}
+  constructor(
+    private readonly accountsService: AccountService,
+    private customerService: CustomerService,
+  ) {}
 
   // @Get()
   // @Redirect('https://google.com', 301)
@@ -79,7 +84,10 @@ export class AccountController {
       // res.status(201).send({ message: 'Successful', data: result });
     } catch (error) {
       // res.status(500).send(error);
-      throw new Error('An error occurred while retrieving accounts.');
+      throw new HttpException(
+        'An error occurred while retrieving banks.',
+        HttpStatus.INTERNAL_SERVER_ERROR,
+      );
     }
   }
 
@@ -91,8 +99,25 @@ export class AccountController {
     description: 'An Account',
     type: AccountEntity,
   })
-  getOne(@Param('id') id: string): Promise<Account> {
-    return this.accountsService.getById(id);
+  async getOne(@Param('id') id: string): Promise<any> {
+    try {
+      const result = await this.accountsService.getById(id);
+
+      const data = result.data;
+      console.log('data', data);
+
+      return {
+        statusCode: HttpStatus.OK,
+        message: 'Successful',
+        data: result,
+      };
+    } catch (error) {
+      throw new HttpException(
+        'An error occurred while retrieving banks.',
+        HttpStatus.INTERNAL_SERVER_ERROR,
+      );
+    }
+    // return this.accountsService.getById(id);
   }
   // ######################################################################
 
@@ -107,8 +132,33 @@ export class AccountController {
     description: 'An Account',
     type: AccountEntity,
   })
-  create(@Body() createAccountDto: CreateAccountDto): Promise<Account> {
-    return this.accountsService.create(createAccountDto);
+  async create(@Body() createAccountDto: CreateAccountDto): Promise<any> {
+    try {
+      // get user id
+      // const getUserId: any = this.customerService.findOne(
+      //   createAccountDto.CustomerId,
+      // );
+      // create account
+      const result = await this.accountsService.create(createAccountDto);
+
+      // const data = result.data;
+      // const message = result.message;
+
+      // console.log('data', data);
+      // console.log('message', message);
+
+      return {
+        statusCode: HttpStatus.OK,
+        message: 'Successful',
+        data: result,
+      };
+    } catch (error) {
+      throw new HttpException(
+        'An error occurred while retrieving banks.',
+        HttpStatus.INTERNAL_SERVER_ERROR,
+      );
+    }
+    // return this.accountsService.create(createAccountDto);
   }
   // ######################################################################
 
@@ -120,12 +170,33 @@ export class AccountController {
     description: 'An Account',
     type: AccountEntity,
   })
-  update(
+  async update(
     @Body() updateAccountDto: UpdateAccountDto,
     @Param('id') id: string,
-  ): Promise<Account> {
-    return this.accountsService.update(id, updateAccountDto);
+  ): Promise<any> {
+    try {
+      const result = await this.accountsService.update(id, updateAccountDto);
+
+      const data = result.data;
+      const message = result.message;
+
+      console.log('data', data);
+      console.log('message', message);
+
+      return {
+        statusCode: HttpStatus.OK,
+        message: 'Successful',
+        data: result,
+      };
+    } catch (error) {
+      throw new HttpException(
+        'An error occurred while retrieving banks.',
+        HttpStatus.INTERNAL_SERVER_ERROR,
+      );
+    }
   }
+  // return this.accountsService.update(id, updateAccountDto);
+
   // ######################################################################
 
   @Delete(':id')
@@ -134,8 +205,28 @@ export class AccountController {
     description: 'An Account',
     type: AccountEntity,
   })
-  remove(@Param('id') id: string): Promise<Account> {
-    return this.accountsService.remove(id);
+  async remove(@Param('id') id: string): Promise<any> {
+    try {
+      const result = await this.accountsService.remove(id);
+
+      const data = result.data;
+      const message = result.message;
+
+      console.log('data', data);
+      console.log('message', message);
+
+      return {
+        statusCode: HttpStatus.OK,
+        message: 'Successful',
+        data: result,
+      };
+    } catch (error) {
+      throw new HttpException(
+        'An error occurred while retrieving banks.',
+        HttpStatus.INTERNAL_SERVER_ERROR,
+      );
+    }
+    // return this.accountsService.remove(id);
   }
   // ######################################################################
 }

@@ -8,6 +8,7 @@ import {
   Param,
   Patch,
   Post,
+  Res,
 } from '@nestjs/common';
 import { Payload } from '@nestjs/microservices';
 import {
