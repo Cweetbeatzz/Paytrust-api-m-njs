@@ -12,4 +12,4 @@ async function GenerateAccNumCode() {
 
 //#######################################################
 
-module.exports = { GenerateAccNumCode };
+export  { GenerateAccNumCode };

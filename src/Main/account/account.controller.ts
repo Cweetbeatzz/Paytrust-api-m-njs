@@ -9,6 +9,9 @@ import {
   Param,
   Post,
   Put,
+  Query,
+  Req,
+  Res,
   UseGuards,
 } from '@nestjs/common';
 import {
@@ -44,8 +47,40 @@ export class AccountController {
     description: 'created',
     type: AccountEntity,
   })
-  getAll(): Promise<Account[]> {
-    return this.accountsService.getAll();
+  async getAll(
+    // @Query() query: any,
+    @Query('accountNumber') accountNumber: string,
+    @Query('sort') sort: string,
+    @Query('limit') limit: number,
+    @Req() req: Request,
+    @Res() res: Response,
+  ): Promise<any> {
+    // const { accountNumber, sort, limit } = query;
+
+    try {
+      const result: any = await this.accountsService.getAll(
+        sort,
+        limit,
+        accountNumber,
+      );
+
+      const data = result.data;
+      const message = result.message;
+
+      console.log('data', data);
+      console.log('message', message);
+
+      return {
+        statusCode: HttpStatus.OK,
+        message: 'Successful',
+        data: result,
+      };
+
+      // res.status(201).send({ message: 'Successful', data: result });
+    } catch (error) {
+      // res.status(500).send(error);
+      throw new Error('An error occurred while retrieving accounts.');
+    }
   }
 
   // ######################################################################
