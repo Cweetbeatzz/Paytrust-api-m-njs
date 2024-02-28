@@ -6,16 +6,15 @@ import { AccountController } from './account.controller';
 import { BankService } from '../banks/banks.service';
 import { CustomerService } from '../customer/customer.service';
 import { BanksModule } from '../banks/banks.module';
+import { CustomerModule } from '../customer/customer.module';
 
 @Module({
   controllers: [AccountController],
-  providers: [
-    AccountService,
-    // BankService, CustomerService
-  ],
+  providers: [AccountService],
   imports: [
     MongooseModule.forFeature([{ name: Account.name, schema: AccountSchema }]),
     BanksModule,
+    CustomerModule,
   ],
 
   exports: [AccountService],

@@ -3,6 +3,8 @@ import {
   Controller,
   Delete,
   Get,
+  HttpException,
+  HttpStatus,
   Param,
   Patch,
   Post,
@@ -33,11 +35,24 @@ export class BankController {
   //   ############################################################
   @SkipThrottle({ default: false })
   @Post()
-  async create(@Payload() data: CreateBankDto) {
+  async create(@Body() createBankDto: CreateBankDto) {
     try {
-      return await this.BankService.create(data);
+      const result = await this.BankService.create(createBankDto);
+
+      const data = result.data;
+      const message = result.message;
+
+      return {
+        statusCode: HttpStatus.CREATED,
+        message: 'Successful',
+        data: result,
+      };
     } catch (error) {
-      return error;
+      // throw new Error('An error occurred while creating bank.');
+      throw new HttpException(
+        'An error occurred while creating the bank.',
+        HttpStatus.INTERNAL_SERVER_ERROR,
+      );
     }
   }
 
@@ -50,8 +65,27 @@ export class BankController {
     description: 'All the Banks',
     type: BankEntity,
   })
-  findAll(): Promise<Bank[]> {
-    return this.BankService.findAll();
+  async findAll(): Promise<any> {
+    try {
+      const result = await this.BankService.findAll();
+
+      const data = result.data;
+      const message = result.message;
+
+      return {
+        statusCode: HttpStatus.OK,
+        message: 'Successful',
+        data: result,
+      };
+    } catch (error) {
+      //  res.status(400).send(error);
+      // throw new Error('An error occurred while retrieving banks.');
+      throw new HttpException(
+        'An error occurred while retrieving banks.',
+        HttpStatus.INTERNAL_SERVER_ERROR,
+      );
+    }
+    // return this.BankService.findAll();
   }
   //   ############################################################
 
@@ -63,8 +97,28 @@ export class BankController {
     description: 'A Bank',
     type: BankEntity,
   })
-  findOne(@Param('id') id: string): Promise<Bank> {
-    return this.BankService.findOne(id);
+  async findOne(@Param('id') id: string): Promise<any> {
+    try {
+      const result = await this.BankService.findOne(id);
+
+      const data = result.data;
+      const message = result.message;
+
+      // console.log("data", data);
+      // console.log("message", message);
+
+      return {
+        statusCode: HttpStatus.OK,
+        message: 'Successful',
+        data: result,
+      };
+    } catch (error) {
+      throw new HttpException(
+        'An error occurred while retrieving banks.',
+        HttpStatus.INTERNAL_SERVER_ERROR,
+      );
+    }
+    // return this.BankService.findOne(id);
   }
   //   ############################################################
 
@@ -76,11 +130,31 @@ export class BankController {
     description: 'Updated',
     type: BankEntity,
   })
-  update(
+  async update(
     @Param('id') id: string,
     @Body() updateBankDto: UpdateBankDto,
-  ): Promise<Bank> {
-    return this.BankService.update(id, updateBankDto);
+  ): Promise<any> {
+    try {
+      const result = await this.BankService.update(id, updateBankDto);
+
+      const data = result.data;
+      const message = result.message;
+
+      // console.log("data", data);
+      // console.log("message", message);
+
+      return {
+        statusCode: HttpStatus.OK,
+        message: 'Successful',
+        data: result,
+      };
+    } catch (error) {
+      throw new HttpException(
+        'An error occurred while retrieving banks.',
+        HttpStatus.INTERNAL_SERVER_ERROR,
+      );
+    }
+    // return this.BankService.update(id, updateBankDto);
   }
   //   ############################################################
 
@@ -91,8 +165,28 @@ export class BankController {
     description: 'Deleted',
     type: BankEntity,
   })
-  remove(@Param('id') id: string): Promise<Bank> {
-    return this.BankService.remove(id);
+  async remove(@Param('id') id: string): Promise<any> {
+    try {
+      const result = await this.BankService.remove(id);
+
+      const data = result.data;
+      const message = result.message;
+
+      // console.log("data", data);
+      // console.log("message", message);
+
+      return {
+        statusCode: HttpStatus.OK,
+        message: 'Successful',
+        data: result,
+      };
+    } catch (error) {
+      throw new HttpException(
+        'An error occurred while retrieving banks.',
+        HttpStatus.INTERNAL_SERVER_ERROR,
+      );
+    }
+    // return this.BankService.remove(id);
   }
   //   ############################################################
 }
