@@ -41,6 +41,39 @@ export class AccountService {
     // return this.AccountModel.find().exec();
     return { message: 'success', data: output, nbHits: output.length };
   }
+
+  // async getAll2(sort, limit, accountNumber): Promise<object> {
+  //   try {
+  //     const queryConditions: any = {};
+  //     let sortOption = { createdAt: -1 }; // Default sorting by createdAt field in descending order
+
+  //     if (accountNumber) {
+  //       // Assuming you want to filter by accountNumber
+  //       queryConditions.accountNumber = accountNumber;
+  //     }
+
+  //     if (sort) {
+  //       // Adjust based on how you're receiving the sort parameter
+  //       // For example, if sort = 'name_asc', then:
+  //       const [field, order] = sort.split('_');
+  //       sortOption = { [field]: order === 'asc' ? 1 : -1 };
+  //     }
+
+  //     const query = this.AccountModel.find(queryConditions);
+  //     if (limit) {
+  //       query.limit(Number(limit)); // Ensure limit is a number
+  //     }
+  //     query.sort(sortOption); // Apply sorting
+
+  //     const output = await query.exec(); // Execute the query
+
+  //     return { message: 'success', data: output, nbHits: output.length };
+  //   } catch (error) {
+  //     console.error('Error fetching accounts:', error);
+  //     throw error; // Or handle this error as needed
+  //   }
+  // }
+
   // ######################################################################
 
   async getById(id: string): Promise<any> {
