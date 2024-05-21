@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { ConflictException, Injectable } from '@nestjs/common';
 import { CreateCustomerDto } from './dtos/createCustomer.dto';
 import { Customer } from './schemas/customer.schema';
 import { Model } from 'mongoose';
@@ -14,7 +14,15 @@ export class CustomerService {
 
   async create(createCustomerDto: CreateCustomerDto): Promise<Customer> {
     const newCustomer = new this.customerModel(createCustomerDto);
-    return await newCustomer.save();
+    try {
+      return await newCustomer.save();
+    } catch (error) {
+      if (error.code === 11000) {
+        // Duplicate email
+        throw new ConflictException('Email already exists');
+      }
+      throw error;
+    }
   }
   // ######################################################################
 

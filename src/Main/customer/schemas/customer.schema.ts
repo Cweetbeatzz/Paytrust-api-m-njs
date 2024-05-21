@@ -24,7 +24,7 @@ export class Customer {
   bvn: string;
   @Prop({ type: Date, required: true })
   dateOfBirth: Date;
-  @Prop({ required: true })
+  @Prop({ type: String, required: true, unique: true })
   email: string;
   @Prop({ required: true })
   phone: Number;
